@@ -2,7 +2,7 @@
 
 Application hooks is an attempt to define an API and protocol that will offer benefits in system configuration consistency and elements ressources access.
 
-### Overview
+### Definition
 An apphooks is a simple script that add/update/remove an element to an external application, and correctly handle failures/unreachable status to these applications.
 
 From the server view, each script is represented as a queue. Only one call is made at a time to the remote application/service.
