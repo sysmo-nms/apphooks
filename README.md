@@ -2,12 +2,12 @@
 
 Application hooks is an attempt to define an API and protocol that will offer benefits in system configuration consistency and elements ressources access.
 
-### Element configuration
+### Overview
 An apphooks is a simple script that add/update/remove an element to an external application, and correctly handle failures/unreachable status to these applications.
 
 From the server view, each script is represented as a queue. Only one call is made at a time to the remote application/service.
 
-The script is able to set some elements properties of the element on the server side.
+The script is able to set some elements properties on the server side.
 
 The script accept 3 arguments:
 * running mode
@@ -25,10 +25,19 @@ Here is an example of a script started in "update" mode, receiving new and old p
 and returning a valid string to set element property.
 ```sh
 $ ./myapphook.sh update "prop1=myprop1;prop2=myprop2..." "prop1=myoldprop1;prop2=myoldprop2..."
-a_property=newprop;other_property=otherprop;apphook_ui_myapphook=http://myappaddress/elementId
+SET;a_property=newprop;other_property=otherprop;apphook_ui_myapphook=http://myappaddress/elementId
 $ echo $?
 0
 ```
+
+Another example of a valid script in "remove" mode, deleting some properties.
+```sh
+$ ./myapphook.sh remove "prop1=myprop1;apphook_ui_myapphokk=http..."
+DELETE;apphook_ui_myapphook;another_prop
+$ echo $?
+0
+```
+
 
 Now the scripts rules:
 - if apphooks:(*any*) return 0, the script is successfull
