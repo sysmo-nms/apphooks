@@ -25,7 +25,7 @@ Here is an example of a script started in "update" mode, receiving new and old p
 and returning a valid string to set element property.
 ```sh
 $ ./myapphook.sh update "prop1=myprop1;prop2=myprop2..." "prop1=myoldprop1;prop2=myoldprop2..."
-a_property=newprop;other_property=otherprop;apphook_ui_myapphook=http://myappaddress/elementId"
+a_property=newprop;other_property=otherprop;apphook_ui_myapphook=http://myappaddress/elementId
 $ echo $?
 0
 ```
