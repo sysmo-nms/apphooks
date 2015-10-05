@@ -40,7 +40,8 @@ $ echo $?
 
 The magic number *255* is the error return code
 
-Now the scripts rules:
+### Handling unreachable applications
+
 - if apphooks:(*any*) return 0, the script is successfull
 - if apphooks:(*any*) return an integer N from 1 to 254, the remote application is (for any reason) unreachable. The manager will run the script again in N*N minutes (ie: if return 2, will run the script in 4 minutes)
 - if apphooks:(*any*) return 255 the apphooks has failed and do not have any way to recovery. From now, the hook is in failure state and will not accept any more commands (will have to be manualy debuged).
