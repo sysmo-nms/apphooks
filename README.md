@@ -1,21 +1,34 @@
 # apphooks
 
-Application hooks is an attempt to define an API and/or protocol that will offer benefits in system configuration consistency and elements ressources access.
+Application hooks is an attempt to define an API and protocol that will offer benefits in system configuration consistency and elements ressources access.
 
 ### Element configuration
-An apphooks should be a simple script that add/update/remove an element to an external application, and correctly handle failures/unreachable status.
+An apphooks is a simple script that add/update/remove an element to an external application, and correctly handle failures/unreachable status to these applications.
 
-The script should be able to set some elements properties,
+From the server view, each script is represented as a queue. Only one call is made at a time to the remote application/service.
 
-The script will accept 3 artuments:
+The script is able to set some elements properties of the element on the server side.
+
+The script accept 3 arguments:
 * running mode
 * element properties
 * old element properties (for *update* only)
 
-The script should accept three running modes:
+The script must implement three running modes:
 * *add*:    to effectively register an element on a remote application,
 * *update*: to update an allready added element on a remote application,
 * *remove*: to remove an allready added element on a remote application.
+
+To effectively set some element properties, the script must write a string to STDOUT.
+
+Here is an example of a script started in "update" mode, receiving new and old properties,
+and returning a valid string to set element property.
+```sh
+$ ./myapphook.sh update "prop1=myprop1;prop2=myprop2..." "prop1=myoldprop1;prop2=myoldprop2..."
+a_property=newprop;other_property=otherprop;apphook_ui_myapphook=http://myappaddress/elementId"
+$ echo $?
+0
+```
 
 Now the scripts rules:
 - if apphooks:(*any*) return 0, the script is successfull
@@ -32,7 +45,6 @@ Each apphooks can set or delete an element property when executed in all modes. 
 
 ### Usage example
 - create an element on the manager,
-- assign a apphook to the element (ie: confhook(simple) "register my conf from network") (will call confhook:add)
 - assign a apphook to the element (ie: dochook(set property) "generate my shared documentation folder") (will call dochook:add). dochook set a property {"apphook_ui_dochook", "http://docapp.zozo/myElementId/"} to the created element, making it accessible via the manager main UI. The manger should recognize property begining by "apphook_ui" and apply his access method "dochook" if defined or use the value as an URI.
-- modify some properties on the element (on the manager) (will call confhook:update and dochook:update)
-- delete the element (on the manager) (will call confhook:remove and dochook:remove)
+- modify some properties on the element (on the manager) will call dochook:update)
+- delete the element (on the manager) will call dochook:remove.
