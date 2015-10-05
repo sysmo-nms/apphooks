@@ -9,7 +9,7 @@ From the server view, each script is represented as a queue. Only one call is ma
 
 The script is able to set some elements properties on the server side.
 
-The script accept 3 arguments:
+The script accept three arguments:
 * running mode
 * element properties
 * old element properties (for *update* only)
