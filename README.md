@@ -55,6 +55,6 @@ Each apphooks can set or delete an element property when executed in all modes. 
 
 ### Usage example
 - create an element on the manager,
-- assign a apphook to the element (ie: dochook(set property) "generate my shared documentation folder") (will call dochook:add). dochook set a property {"apphook_ui_dochook", "http://docapp.zozo/myElementId/"} to the created element, making it accessible via the manager main UI. The manger should recognize property begining by "apphook_ui" and apply his access method "dochook" if defined or use the value as an URI.
-- modify some properties on the element (on the manager) will call dochook:update)
-- delete the element (on the manager) will call dochook:remove.
+- assign a apphook to the element: myhook will call myhook:add. Myhook set a property {"apphook_ui_myhook", "http://myhook-server/myElementId/"} to the created element, making it accessible via the manager main UI. The manger should recognize property begining by "apphook_ui" and apply his access method "myhook" if defined or use the value as an URI.
+- modify some properties on the element (on the manager) will call myhook:update,
+- delete the element (on the manager) will call myhook:remove.
