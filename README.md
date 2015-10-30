@@ -3,7 +3,7 @@
 Application hooks is an attempt to define an API and protocol that will offer benefits in system configuration consistency and elements ressources access.
 
 ### Definition
-An apphooks is a simple script that add/update/remove an element to an external application, and correctly handle failures/unreachable status to these applications.
+An apphooks is a simple Ruby script that add/update/remove an element to an external application, and correctly handle failures/unreachable status to these applications.
 
 From the server view, each script is represented as a queue. Only one call is made at a time to the remote application/service.
 
@@ -24,7 +24,7 @@ To effectively set some element properties, the script must write a string to ST
 Here is an example of a script started in "update" mode, receiving new and old properties,
 and returning a valid string to set element property.
 ```sh
-$ ./myapphook.sh update "prop1=myprop1;prop2=myprop2..." "prop1=myoldprop1;prop2=myoldprop2..."
+$ ./myapphook.rb update "prop1=myprop1;prop2=myprop2..." "prop1=myoldprop1;prop2=myoldprop2..."
 SET;a_property=newprop;other_property=otherprop;apphook_ui_myapphook=http://myappaddress/elementId
 $ echo $?
 0
@@ -32,7 +32,7 @@ $ echo $?
 
 Another example of a valid script in "remove" mode, deleting some properties.
 ```sh
-$ ./myapphook.sh remove "prop1=myprop1;apphook_ui_myapphokk=http..."
+$ ./myapphook.rb remove "prop1=myprop1;apphook_ui_myapphokk=http..."
 DELETE;apphook_ui_myapphook;another_prop
 $ echo $?
 0
