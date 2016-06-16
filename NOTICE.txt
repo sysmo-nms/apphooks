@@ -1,5 +1,0 @@
-Sysmo NMS Apphooks
-Copyright 2015 Sebastien Serre <ssbx@sysmo.io>
-
-This product includes software developed at
-Sysmo NMS (http://www.sysmo.io/).
