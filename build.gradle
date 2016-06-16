@@ -1,0 +1,113 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
+apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: 'jdepend'
+
+sourceCompatibility = 1.7
+group = "io.sysmo"
+archivesBaseName = "apphooks"
+
+/*
+ * "gradle uploadArchives" will upload:
+ * version = "X.X.X"          -> a new release
+ * version = "X.X.X-SNAPSHOT" -> a new snapshot
+ */
+version = "0.1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.2'
+}
+
+jdepend  { ignoreFailures = true }
+pmd      { ignoreFailures = true }
+
+findbugs { ignoreFailures = true }
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+javadoc {
+    options.overview = "overview.html"
+    options.docTitle = "AppHooks"
+    options.windowTitle = "AppHooks"
+}
+
+dependencies {
+    testCompile 'junit:junit:4.2'
+    compile 'org.glassfish:javax.json:1.0.4'
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'org.slf4j:slf4j-jdk14:1.7.12'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'AppHooks glue utils'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'AppHooks glue utils'
+                url 'http://www.sysmo.io/apphooks'
+
+                scm {
+                    connection 'scm:git:git@github.com:://github.com:sysom-nms/apphooks.git'
+                    developerConnection 'scm:git:git@github.com:://github.com:sysmo-nms/apphooks.git'
+                    url 'git@github.com:sysmo-nms/apphooks.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'ssbx'
+                        name 'Sebastien Serre'
+                        email 'ssbx@sysmo.io'
+                    }
+                }
+            }
+        }
+    }
+}
