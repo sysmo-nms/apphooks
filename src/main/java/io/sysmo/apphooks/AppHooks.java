@@ -15,6 +15,34 @@
  */
 package io.sysmo.apphooks;
 
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.impl.StdSchedulerFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class AppHooks
 {
+    private static Logger logger = LoggerFactory.getLogger(AppHooks.class);
+    public static void startScheduler()
+    {
+        Scheduler scheduler = null;
+        try {
+            scheduler = StdSchedulerFactory.getDefaultScheduler();
+            scheduler.start();
+        } catch (SchedulerException se) {
+            AppHooks.logger.info("error", se);
+        } finally {
+            if (scheduler != null)
+                try {
+                    scheduler.shutdown();
+                } catch (Exception e) {
+                    // ignore
+                }
+        }
+
+        AppHooks.logger.info("AppHooks end");
+    }
 }

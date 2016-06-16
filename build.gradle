@@ -4,11 +4,12 @@ apply plugin: 'signing'
 apply plugin: 'pmd'
 apply plugin: 'findbugs'
 apply plugin: 'jdepend'
+apply plugin: 'application'
 
 sourceCompatibility = 1.7
 group = "io.sysmo"
 archivesBaseName = "apphooks"
-
+mainClassName = 'io.sysmo.apphooks.impl.DevelopmentImpl'
 /*
  * "gradle uploadArchives" will upload:
  * version = "X.X.X"          -> a new release
@@ -61,7 +62,7 @@ javadoc {
 
 dependencies {
     testCompile 'junit:junit:4.2'
-    compile 'org.glassfish:javax.json:1.0.4'
+    compile 'org.quartz-scheduler:quartz:2.2.3'
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile 'org.slf4j:slf4j-jdk14:1.7.12'
 }
