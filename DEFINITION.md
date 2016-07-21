@@ -5,6 +5,8 @@ Application hooks is an attempt to define an API and protocol that will offer be
 ### Definition
 An apphooks is a simple Ruby script that add/update/remove an element to an external application, and correctly handle failures/unreachable status to these applications.
 
+*About Update events*: Update on a modification of a property the hook is listening. Only the modification of one of the registred properties for the hook will trigger an update event for this hook. If the hook listen multiple element properties and some have changed, only one update is triggered. An Update event contains all properties of the element. This system avoid properties change loop (Update_event my_prop -> hook modifi_property my_prop -> Update_event my_prop...). *A hook must not listen on a property he can modify*.
+
 From the server view, each script is represented as a queue. Only one call is made at a time to the remote application/service.
 
 The script is able to set some elements properties on the server side.
