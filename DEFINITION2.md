@@ -1,9 +1,9 @@
-Simple pubsub + sync
---------------------
+Simple pubsub + API web
+-----------------------
 
 Plus simple que la version 1. Une API web complete avec authentification digest.
 
-## Un pubsubhubbub amélioré
+## Un pubsubhubbub/API web
 
 L'application distante qui s'initialise effectue:
 - une souscription subhub,
@@ -20,11 +20,7 @@ Quand une application usilise l'API web pour modifier un élément l'evenement con
 ## Comportement particulier
 Le serveur retourne succes si la ressource à modifier n'existe pas (evenement délétion certainement en transit),
 
-
-
-
-Détail de l'API Web
--------------------
+## Détail de l'API Web
 - ajouter/supprimer sonde,
 - ajouter/supprimer cible,
 - modifier propriété sonde,
@@ -32,9 +28,9 @@ Détail de l'API Web
 - pose/démarer sonde
 
 
-Détail de l'utilisation des propriétés coté serveur
----------------------------------------------------
+## Détail de l'utilisation des propriétés coté serveur
 Voir la DEFINITION.md pour le détail, en particulier la fonction d'acces à la ressource depuis l'url configurée par l'application.
+
 
 *Et voila!*
 
