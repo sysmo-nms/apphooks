@@ -18,14 +18,30 @@ Quand une application usilise l'API web pour modifier un élément l'evenement con
 
 
 ## Comportement particulier
-Le serveur retourne succes si la ressource à modifier n'existe pas (evenement délétion certainement en transit),
+- Le serveur retourne succes si la ressource à modifier n'existe pas (evenement délétion certainement en transit),
 
-## Détail de l'API Web
+## En cas de problème réseau
+Trois solutions
+1 - Le coté serveur accumule les évènements pour tous les envoyer en même temps des que la connexion est rétablie (prevoir un timeout),
+2 - Les évènements possèdent un identifiant incrémentable si l'application detecte une anomalie: se déconnecter et recommencer (subhub,dump, le plus simple),
+3 - Les évènements possèdent un identifiant incrémentable si l'application detecte une anomalie: un journal d'evenements coté serveur (l'application demande les évènements manquants).
+
+## Détail de l'API Web serveur
 - ajouter/supprimer sonde,
 - ajouter/supprimer cible,
 - modifier propriété sonde,
 - modifier propriété cible (ex:url access ressource),
 - pose/démarer sonde
+- recupérer info sonde/cible,
+- recupérer info toutes les sondes,
+- recupérer info toutes les cibles,
+- id de l'actuel id evenement (pour target/probe),
+- ping.
+
+## Détail de l'API Web hook
+- nouvel evenements (1..N),
+- dump (target/probe),
+- ping.
 
 
 ## Détail de l'utilisation des propriétés coté serveur
