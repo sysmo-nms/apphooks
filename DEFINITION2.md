@@ -26,6 +26,10 @@ Trois solutions
 2 - Les évènements possèdent un identifiant incrémentable si l'application detecte une anomalie: se déconnecter et recommencer (subhub,dump, le plus simple),
 3 - Les évènements possèdent un identifiant incrémentable si l'application detecte une anomalie: un journal d'evenements coté serveur (l'application demande les évènements manquants).
 
+Si journal serveur: 
+- limiter la durée de rétention à 24H, et unsubscribe l'application,
+- check alive depuis app->serveur qui retourne erreur si plus souscripteur.
+
 ## Détail de l'API Web serveur
 - ajouter/supprimer sonde,
 - ajouter/supprimer cible,
