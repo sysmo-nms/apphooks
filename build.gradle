@@ -83,7 +83,7 @@ uploadArchives {
                 packaging 'jar'
                 // optionally artifactId can be defined here
                 description 'AppHooks glue utils'
-                url 'http://www.sysmo.io/apphooks'
+                url 'http://sysmo-nms.github.io/apphooks'
 
                 scm {
                     connection 'scm:git:git@github.com:://github.com:sysom-nms/apphooks.git'
